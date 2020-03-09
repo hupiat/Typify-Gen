@@ -15,7 +15,7 @@ function typifyGen() {
     if (!objects.length) {
         throw Error("At least one argument should be provided");
     }
-    var dynType = arrayConvert(objects[0]);
+    var genType = arrayConvert(objects[0]);
     function isGenType(object) {
         var other = objects[0];
         return (other instanceof object &&
