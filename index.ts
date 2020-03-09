@@ -1,25 +1,50 @@
-function arrayConvert<T>(...args: T[]): T[] {
-	return args;
-}
+// Hack to get gen type
+const arrayConvert = <T>(...args: T[]): T[] => args;
 
-export function typifyGen<T>(...objects: T[]) {
+const areNotObjects = (val: any, other: any) =>
+	!(val instanceof Object) && !(other instanceof Object);
+
+const oneIsNotObject = (val: any, other: any) =>
+	!(val instanceof Object) || !(other instanceof Object);
+
+const isKeyDefined = (object: any, key: string) => object[key] !== undefined;
+
+export const typifyGen = <T>(objects: T[]) => {
 	if (!objects.length) {
 		throw Error("At least one argument should be provided");
 	}
 	const genType = arrayConvert(objects[0]);
 	type GenType = typeof genType[number];
 
-	function isGenType(object: any): object is GenType {
-		if (!(objects[0] instanceof object) && !(object instanceof object)) {
-			return typeof objects[0] === typeof object;
-		} else if (!(objects[0] instanceof object) || !(object instanceof object)) {
+	const isGenType = (val: any): val is GenType => {
+		if (areNotObjects(objects[0], val)) {
+			return typeof objects[0] === typeof val;
+		} else if (oneIsNotObject(objects[0], val)) {
 			return false;
 		}
-		return Object.keys(object).every(key => !!(objects[0] as any)[key]);
-	}
+		return (
+			val && Object.keys(objects[0] as any).every(key => isKeyDefined(val, key))
+		);
+	};
+
+	const coercion = (val: any): GenType => {
+		if (areNotObjects(objects[0], val)) {
+			return val as GenType;
+		} else if (oneIsNotObject(objects[0], val)) {
+			return val;
+		}
+		Object.keys(val)
+			.filter(key => !isKeyDefined(objects[0], key))
+			.forEach(key => delete val[key]);
+		Object.keys(objects[0] as Object)
+			.filter(key => !isKeyDefined(val, key))
+			.forEach(key => (val[key] = undefined));
+		return val;
+	};
 
 	return {
-		objects: objects as GenType[],
-		isGenType: isGenType
+		coercion,
+		isGenType,
+		objects: objects as GenType[]
 	};
-}
+};

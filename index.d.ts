@@ -1,4 +1,5 @@
-export declare function typifyGen<T>(...objects: T[]): {
+export declare const typifyGen: <T>(objects: T[]) => {
+    coercion: (val: any) => T;
+    isGenType: (val: any) => val is T;
     objects: T[];
-    isGenType: (object: any) => object is T;
 };
