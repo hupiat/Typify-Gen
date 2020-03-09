@@ -6,10 +6,10 @@ export function typifyGen<T>(...objects: T[]) {
 	if (!objects.length) {
 		throw Error("At least one argument should be provided");
 	}
-	const dynType = arrayConvert(objects[0]);
-	type DynType = typeof dynType[number];
+	const genType = arrayConvert(objects[0]);
+	type GenType = typeof genType[number];
 
-	function isGenType(object: any): object is DynType {
+	function isGenType(object: any): object is GenType {
 		const other = objects[0];
 		return (
 			other instanceof object &&
@@ -18,7 +18,7 @@ export function typifyGen<T>(...objects: T[]) {
 	}
 
 	return {
-		objects: objects as DynType[],
+		objects: objects as GenType[],
 		isGenType: isGenType
 	};
 }
