@@ -7,7 +7,9 @@ Generates dynamic types in TypeScript
 ```typescript
 const MyArray: any = [...];
 
-const MyArrayTyped = typifyGen(MyArray).objects;
+const { objects, isGenType, coercion } = typifyGen(MyArray);
+
+const MyArrayTyped = objects;
 
 // MyArray has been typed using the union of properties given by the objects in the array
 ```
