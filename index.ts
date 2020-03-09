@@ -10,11 +10,12 @@ export function typifyGen<T>(...objects: T[]) {
 	type GenType = typeof genType[number];
 
 	function isGenType(object: any): object is GenType {
-		const other = objects[0];
-		return (
-			other instanceof object &&
-			Object.keys(object).every(key => !!(other as any)[key])
-		);
+		if (!(objects[0] instanceof object) && !(object instanceof object)) {
+			return typeof objects[0] === typeof object;
+		} else if (!(objects[0] instanceof object) || !(object instanceof object)) {
+			return false;
+		}
+		return Object.keys(object).every(key => !!(objects[0] as any)[key]);
 	}
 
 	return {

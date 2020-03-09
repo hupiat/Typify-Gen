@@ -17,9 +17,13 @@ function typifyGen() {
     }
     var genType = arrayConvert(objects[0]);
     function isGenType(object) {
-        var other = objects[0];
-        return (other instanceof object &&
-            Object.keys(object).every(function (key) { return !!other[key]; }));
+        if (!(objects[0] instanceof object) && !(object instanceof object)) {
+            return typeof objects[0] === typeof object;
+        }
+        else if (!(objects[0] instanceof object) || !(object instanceof object)) {
+            return false;
+        }
+        return Object.keys(object).every(function (key) { return !!objects[0][key]; });
     }
     return {
         objects: objects,
