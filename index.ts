@@ -20,7 +20,7 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 
 	const coercion = (val: any): GenType => {
 		Object.keys(val)
-			.filter(key => !isKeyDefined(objects[0], key))
+			.filter(key => !keys.has(key))
 			.forEach(key => delete val[key]);
 
 		[...keys]

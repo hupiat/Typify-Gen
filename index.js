@@ -42,7 +42,7 @@ exports.typifyGen = function (objects) {
     };
     var coercion = function (val) {
         Object.keys(val)
-            .filter(function (key) { return !isKeyDefined(objects[0], key); })
+            .filter(function (key) { return !keys.has(key); })
             .forEach(function (key) { return delete val[key]; });
         __spread(keys).filter(function (key) { return !isKeyDefined(val, key); })
             .forEach(function (key) { return (val[key] = undefined); });
