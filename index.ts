@@ -18,7 +18,7 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 	const isGenType = (val: Object): val is GenType =>
 		!!val && [...keys].every(key => isKeyDefined(val, key));
 
-	const coercion = (val: Object): GenType => {
+	const genTypeCoercion = (val: Object): GenType => {
 		Object.keys(val)
 			.filter(key => !keys.has(key))
 			.forEach(key => delete (val as any)[key]);
@@ -31,8 +31,9 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 	};
 
 	return {
-		coercion,
+		genTypeCoercion,
 		isGenType,
+		genTypeKeys: [...keys],
 		objects: objects as GenType[]
 	};
 };

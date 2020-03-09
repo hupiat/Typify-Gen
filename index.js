@@ -40,7 +40,7 @@ exports.typifyGen = function (objects) {
     var isGenType = function (val) {
         return !!val && __spread(keys).every(function (key) { return isKeyDefined(val, key); });
     };
-    var coercion = function (val) {
+    var genTypeCoercion = function (val) {
         Object.keys(val)
             .filter(function (key) { return !keys.has(key); })
             .forEach(function (key) { return delete val[key]; });
@@ -49,8 +49,9 @@ exports.typifyGen = function (objects) {
         return val;
     };
     return {
-        coercion: coercion,
+        genTypeCoercion: genTypeCoercion,
         isGenType: isGenType,
+        genTypeKeys: __spread(keys),
         objects: objects
     };
 };

@@ -22,7 +22,13 @@ describe("TypifyGen", () => {
 		);
 	});
 
-	const { isGenType, objects, coercion } = typifyGen(flowers);
+	const { objects, isGenType, genTypeCoercion, genTypeKeys } = typifyGen(
+		flowers
+	);
+
+	it("should match with keys", () => {
+		expect(genTypeKeys).toEqual(["petals", "color"]);
+	});
 
 	it("should be the same type", () => {
 		const flower = {
@@ -38,7 +44,7 @@ describe("TypifyGen", () => {
 			petals: 0
 		};
 		expect(isGenType(flower)).toBeFalse();
-		expect(isGenType(undefined)).toBeFalse();
+		expect(isGenType({})).toBeFalse();
 	});
 
 	it("should coerce the given objects with the exact same keys", () => {
@@ -47,8 +53,8 @@ describe("TypifyGen", () => {
 			color: "blue",
 			brambles: 17
 		};
-		expect((coercion(flower) as any).brambles).toBeUndefined();
-		expect(coercion({})).toEqual(
+		expect((genTypeCoercion(flower) as any).brambles).toBeUndefined();
+		expect(genTypeCoercion({})).toEqual(
 			jasmine.objectContaining({
 				petals: undefined,
 				color: undefined
