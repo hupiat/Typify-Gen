@@ -10,8 +10,6 @@ const MyArray: any = [...];
 const MyArrayTyped = typifyGen(MyArray).objects;
 
 // MyArray has been typed using the union of properties given by the objects in the array
-
-// Supplying an array of primitives will have no effect
 ```
 
 # API
@@ -19,5 +17,7 @@ const MyArrayTyped = typifyGen(MyArray).objects;
 ```typescript
 objects : GenType[]
 
-isGenType : (object: any) => object is GenType
+isGenType : (object: Object) => object is GenType
+
+coercion: (object: Object) => GenType
 ```

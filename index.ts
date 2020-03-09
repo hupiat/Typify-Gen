@@ -15,19 +15,19 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 	const keys: Set<string> = new Set();
 	objects.forEach(obj => Object.keys(obj).forEach(key => keys.add(key)));
 
-	const isGenType = (val: any): val is GenType =>
+	const isGenType = (val: Object): val is GenType =>
 		!!val && [...keys].every(key => isKeyDefined(val, key));
 
-	const coercion = (val: any): GenType => {
+	const coercion = (val: Object): GenType => {
 		Object.keys(val)
 			.filter(key => !keys.has(key))
-			.forEach(key => delete val[key]);
+			.forEach(key => delete (val as any)[key]);
 
 		[...keys]
 			.filter(key => !isKeyDefined(val, key))
-			.forEach(key => (val[key] = undefined));
+			.forEach(key => ((val as any)[key] = undefined));
 
-		return val;
+		return val as GenType;
 	};
 
 	return {
