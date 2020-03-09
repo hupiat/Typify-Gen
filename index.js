@@ -16,6 +16,14 @@ function typifyGen() {
         throw Error("At least one argument should be provided");
     }
     var dynType = arrayConvert(objects[0]);
-    return objects.map(function (o) { return o; });
+    function isGenType(object) {
+        var other = objects[0];
+        return (other instanceof object &&
+            Object.keys(object).every(function (key) { return !!other[key]; }));
+    }
+    return {
+        objects: objects,
+        isGenType: isGenType
+    };
 }
 exports.typifyGen = typifyGen;
