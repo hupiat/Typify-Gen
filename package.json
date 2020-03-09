@@ -1,0 +1,30 @@
+{
+	"name": "typify-gen",
+	"version": "1.0.1",
+	"description": "Generates dynamic types",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/hupiat/Typify-Gen.git"
+	},
+	"keywords": [
+		"dynamic",
+		"type",
+		"types",
+		"var",
+		"vars",
+		"generate",
+		"use"
+	],
+	"prepublish": "tsc",
+	"author": "hupiat",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/hupiat/Typify-Gen/issues"
+	},
+	"homepage": "https://github.com/hupiat/Typify-Gen#readme"
+}
