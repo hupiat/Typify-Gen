@@ -17,6 +17,7 @@ const MyArrayTyped = typifyGen(MyArray).objects;
 # API
 
 ```typescript
-- objects : GenType[]
-- isGenType : (object: any) => object is GenType
+objects : GenType[]
+
+isGenType : (object: any) => object is GenType
 ```
