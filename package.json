@@ -1,6 +1,6 @@
 {
 	"name": "typify-gen",
-	"version": "1.1.2",
+	"version": "1.2.0",
 	"description": "Generates dynamic types",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
