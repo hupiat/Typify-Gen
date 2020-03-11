@@ -1,0 +1,7 @@
+.DS_Store
+/node_modules
+/spec
+README.md
+tsconfig.json
+package.json
+package-lock.json
