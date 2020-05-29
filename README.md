@@ -9,7 +9,7 @@ const MyArray: <any extends Object>[] = [...];
 
 const { objects, isGenType, genTypeCoercion, genTypeKeys } = typifyGen(MyArray);
 
-const MyArrayTyped: GenType[] = objects;
+const MyArrayTyped = objects;
 
 // MyArray has been typed using the union of properties given by the objects in the array
 ```
