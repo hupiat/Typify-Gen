@@ -1,4 +1,4 @@
-# Typify-Gen
+## Resume
 
 Generates dynamic types in TypeScript
 
@@ -14,7 +14,7 @@ const MyArrayTyped = objects;
 // MyArray has been typed using the union of properties given by the objects in the array
 ```
 
-# API
+## API
 
 ```typescript
 objects : GenType[]
