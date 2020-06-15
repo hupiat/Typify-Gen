@@ -1,7 +1,7 @@
 {
 	"name": "typify-gen",
-	"version": "1.2.2",
-	"description": "Generates dynamic types",
+	"version": "1.2.3",
+	"description": "Generates dynamic types in TypeScript",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
@@ -19,7 +19,9 @@
 		"var",
 		"vars",
 		"generate",
-		"use"
+		"use",
+		"typescript",
+		"ts"
 	],
 	"prepublish": "tsc",
 	"author": "hupiat",
