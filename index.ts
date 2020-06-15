@@ -3,9 +3,9 @@ const arrayConvert = <T>(...args: T[]): T[] => args;
 
 const isKeyDefined = (object: any, key: string) => object[key] !== undefined;
 
-export const typifyGen = <T extends Object>(objects: T[]) => {
+export const typifyGen = <T extends object>(objects: T[]) => {
 	if (!objects.length) {
-		throw Error("At least one argument should be provided");
+		throw Error('At least one argument should be provided');
 	}
 
 	const genType = arrayConvert(objects[0]);
@@ -13,19 +13,19 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 
 	// We collect all the keys, optionals or not
 	const keys: Set<string> = new Set();
-	objects.forEach(obj => Object.keys(obj).forEach(key => keys.add(key)));
+	objects.forEach((obj) => Object.keys(obj).forEach((key) => keys.add(key)));
 
-	const isGenType = (val: Object): val is GenType =>
-		!!val && [...keys].every(key => isKeyDefined(val, key));
+	const isGenType = (val: object): val is GenType =>
+		!!val && [...keys].every((key) => isKeyDefined(val, key));
 
-	const genTypeCoercion = (val: Object): GenType => {
+	const genTypeCoercion = (val: object): GenType => {
 		Object.keys(val)
-			.filter(key => !keys.has(key))
-			.forEach(key => delete (val as any)[key]);
+			.filter((key) => !keys.has(key))
+			.forEach((key) => delete (val as any)[key]);
 
 		[...keys]
-			.filter(key => !isKeyDefined(val, key))
-			.forEach(key => ((val as any)[key] = undefined));
+			.filter((key) => !isKeyDefined(val, key))
+			.forEach((key) => ((val as any)[key] = undefined));
 
 		return val as GenType;
 	};
@@ -34,6 +34,6 @@ export const typifyGen = <T extends Object>(objects: T[]) => {
 		genTypeCoercion,
 		isGenType,
 		genTypeKeys: [...keys],
-		objects: objects as GenType[]
+		objects: objects as GenType[],
 	};
 };

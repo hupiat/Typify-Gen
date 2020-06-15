@@ -5,7 +5,7 @@ Generates dynamic types in TypeScript
 `npm i typify-gen --save`
 
 ```typescript
-const MyArray: <any extends Object>[] = [...];
+const MyArray: <any extends object>[] = [...];
 
 const { objects, isGenType, genTypeCoercion, genTypeKeys } = typifyGen(MyArray);
 
@@ -19,9 +19,9 @@ const MyArrayTyped = objects;
 ```typescript
 objects : GenType[]
 
-isGenType : (object: Object) => object is GenType
+isGenType : (object: object) => object is GenType
 
-genTypeCoercion: (object: Object) => GenType
+genTypeCoercion: (object: object) => GenType
 
 genTypeKeys: string[]
 ```
