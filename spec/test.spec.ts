@@ -30,8 +30,8 @@ describe('typify-gen', () => {
 
 	it('should be the same type', () => {
 		const flower = {
-			petals: 1,
-			color: 'black',
+			petals: 2,
+			color: 'purple',
 		};
 		expect(isGenType(flower)).toBeTrue();
 		expect(isGenType(objects[0])).toBeTrue();
