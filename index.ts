@@ -25,7 +25,10 @@ export const typifyGen = <T extends object>(
     for (const obj of objects) {
       Object.keys(obj).forEach((key) => {
         for (const other of objects) {
-          if (other[key]) {
+          if (other === obj) {
+            continue;
+          }
+          if (!other[key]) {
             keysToRemove.add(key);
             break;
           }
