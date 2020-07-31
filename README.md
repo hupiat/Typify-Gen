@@ -22,7 +22,7 @@ const myArrayTyped = objects;
 ## API
 
 ```typescript
-typifyGen<T>(objects: T, logic: "union" | "intersection")
+typifyGen<T>(objects: T, logic?: "union" | "intersection")
 
 objects : GenType[]
 
