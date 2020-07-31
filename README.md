@@ -28,9 +28,9 @@ objects : GenType[]
 
 isGenType : (val: object) => object is GenType
 
-isGenTypeInherited: (val: object) => boolean
+isGenTypeInherited : (val: object) => boolean
 
-genTypeCoercion: (val: object) => GenType
+genTypeCoercion : (val: object) => GenType
 
-genTypeKeys: string[]
+genTypeKeys : string[]
 ```
