@@ -7,17 +7,23 @@ Generates dynamic types in TypeScript
 ```typescript
 const myArray: <any extends object>[] = [...];
 
-const { objects } = typifyGen(MyArray);
+const { objects } = typifyGen(myArray);
 
 const myArrayTyped = objects;
 
 // myArray has been typed using the union
 // of properties given by the objects in the array
+
+// if you set up the intersection generation, you will
+// be warned that your optional properties will still be displayed
+// by autocompletion due to non-runtime TypeScript's behaviour
 ```
 
 ## API
 
 ```typescript
+typifyGen<T>(objects: T, logic: "union" | "intersection")
+
 objects : GenType[]
 
 isGenType : (val: object) => object is GenType

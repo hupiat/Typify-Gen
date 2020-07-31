@@ -1,5 +1,6 @@
 export declare const typifyGen: <T extends object>(
-  objects: T[]
+  objects: T[],
+  logic?: "union" | "intersection"
 ) => {
   genTypeCoercion: (val: object) => T;
   isGenType: (val: object) => val is T;

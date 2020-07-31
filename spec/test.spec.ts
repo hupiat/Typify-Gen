@@ -9,10 +9,12 @@ describe("typify-gen", () => {
     {
       petals: 4,
       color: "yellow",
+      name: "tulip",
     },
     {
       petals: 8,
       color: "blue",
+      brambles: 15,
     },
   ];
 
@@ -22,13 +24,33 @@ describe("typify-gen", () => {
     );
   });
 
+  it("should genify using the union of properties", () => {
+    const { objects } = typifyGen(flowers);
+    objects.forEach((obj) => {
+      expect(obj.color).toBeDefined();
+      expect(obj.petals).toBeDefined();
+    });
+    expect(objects[1].name).toBeDefined();
+    expect(objects[2].brambles).toBeDefined();
+  });
+
+  it("should genify using the intersection of properties", () => {
+    const { objects } = typifyGen(flowers, "intersection");
+    objects.forEach((obj) => {
+      expect(obj.color).toBeDefined();
+      expect(obj.petals).toBeDefined();
+    });
+    expect(objects[1].name).toBeUndefined();
+    expect(objects[2].brambles).toBeUndefined();
+  });
+
   const {
     objects,
     isGenType,
     isGenTypeInherited,
     genTypeCoercion,
     genTypeKeys,
-  } = typifyGen(flowers);
+  } = typifyGen(flowers, "intersection");
 
   it("should match with keys", () => {
     expect(genTypeKeys).toEqual(["petals", "color"]);
