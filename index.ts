@@ -25,7 +25,7 @@ export const typifyGen = <T extends object>(
     for (const obj of objects) {
       Object.keys(obj).forEach((key) => {
         for (const other of objects) {
-          if (!(other as any)[key]) {
+          if (other[key]) {
             keysToRemove.add(key);
             break;
           }
@@ -34,7 +34,7 @@ export const typifyGen = <T extends object>(
     }
     keysToRemove.forEach((key) => {
       for (const obj of objects) {
-        delete (obj as any)[key];
+        delete obj[key];
       }
     });
   }
@@ -58,11 +58,11 @@ export const typifyGen = <T extends object>(
   const genTypeCoercion = (val: object): GenType => {
     Object.keys(val)
       .filter((key) => !keys.has(key))
-      .forEach((key) => delete (val as any)[key]);
+      .forEach((key) => delete val[key]);
 
     [...keys]
       .filter((key) => !isKeyDefined(val, key))
-      .forEach((key) => ((val as any)[key] = undefined));
+      .forEach((key) => (val[key] = undefined));
 
     return val as GenType;
   };
