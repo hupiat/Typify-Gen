@@ -19,11 +19,11 @@ const MyArrayTyped = objects;
 ```typescript
 objects : GenType[]
 
-isGenType : (object: object) => object is GenType
+isGenType : (val: object) => object is GenType
 
 isGenTypeInherited: (val: object) => boolean
 
-genTypeCoercion: (object: object) => GenType
+genTypeCoercion: (val: object) => GenType
 
 genTypeKeys: string[]
 ```
