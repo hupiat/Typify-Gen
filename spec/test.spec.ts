@@ -51,7 +51,7 @@ describe("typify-gen", () => {
     expect(isGenType({})).toBeFalsy();
   });
 
-  it("should be a type extended", () => {
+  it("should be an extended type", () => {
     const flower = {
       petals: 2,
       color: "purple",
