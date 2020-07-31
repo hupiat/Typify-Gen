@@ -5,13 +5,14 @@ Generates dynamic types in TypeScript
 `npm i typify-gen --save`
 
 ```typescript
-const MyArray: <any extends object>[] = [...];
+const myArray: <any extends object>[] = [...];
 
-const { objects, isGenType, genTypeCoercion, genTypeKeys } = typifyGen(MyArray);
+const { objects } = typifyGen(MyArray);
 
-const MyArrayTyped = objects;
+const myArrayTyped = objects;
 
-// MyArray has been typed using the union of properties given by the objects in the array
+// myArray has been typed using the union
+// of properties given by the objects in the array
 ```
 
 ## API
