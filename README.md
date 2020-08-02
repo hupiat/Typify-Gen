@@ -16,7 +16,8 @@ const myArrayTyped = objects;
 
 // if you set up the intersection generation, you will
 // be warned that your optional properties will still be displayed
-// by autocompletion due to non-runtime TypeScript's behaviour
+// by autocompletion due to TypeScript's behaviour, which cannot
+// infer the dynamic generation
 ```
 
 ## API
