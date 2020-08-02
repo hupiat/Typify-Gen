@@ -9,7 +9,13 @@ export const typifyGen = <T extends object>(
   objects: T[],
   logic: GenerationLogic = "union"
 ) => {
-  if (objects && !objects.length) {
+  if (!objects) {
+    throw Error("Undefined or null argument");
+  }
+  if (!Array.isArray(objects)) {
+    throw Error("The provided arguments should be in an array");
+  }
+  if (!objects.length) {
     throw Error("At least one argument should be provided");
   }
 

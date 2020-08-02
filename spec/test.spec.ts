@@ -18,7 +18,11 @@ const flowers = [
 ];
 
 describe("typify-gen", () => {
-  it("should throw an error as there is no element to inspect", () => {
+  it("should throw errors as there is no element to inspect", () => {
+    expect(() => typifyGen(null)).toThrow(Error("Undefined or null argument"));
+    expect(() => typifyGen("foo" as any)).toThrow(
+      Error("The provided arguments should be in an array")
+    );
     expect(() => typifyGen([])).toThrow(
       Error("At least one argument should be provided")
     );
