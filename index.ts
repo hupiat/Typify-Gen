@@ -18,7 +18,7 @@ export const typifyGen = <T extends object>(
 
   if (logic === "intersection") {
     console.warn(
-      "typify-gen : Be careful, you set the intersection genify logic, but your optional properties will still be displayed by TypeScript"
+      "typify-gen : Be careful, you set the intersection generation logic, but your optional properties will still be displayed by TypeScript"
     );
     // Removing all keys that are not shared
     const keysToRemove: Set<string> = new Set();
@@ -48,15 +48,36 @@ export const typifyGen = <T extends object>(
 
   // Then collecting keys without duplicatas to define manipulation methods
   const keys: Set<string> = new Set();
-  objects.forEach((obj) => Object.keys(obj).forEach((key) => keys.add(key)));
+  const optionalKeys: Set<string> = new Set();
+  let isFirstIteration = true;
+  objects.forEach((obj) => {
+    Object.keys(obj).forEach((key) => {
+      if (!isFirstIteration && !keys.has(key)) {
+        optionalKeys.add(key);
+      }
+      keys.add(key);
+    });
+    if (isFirstIteration) {
+      isFirstIteration = false;
+    }
+  });
 
-  const isGenType = (val: object): val is GenType =>
-    !!val &&
-    [...keys].every((key) => isKeyDefined(val, key)) &&
-    keys.size === Object.keys(val).length;
+  const isGenType = (val: object): val is GenType => {
+    if (!val) return false;
+    const matchingKeys = Object.keys(val).every((key) => keys.has(key));
+    const sameLengthKeys =
+      logic === "intersection"
+        ? Object.keys(val).length === keys.size
+        : Object.keys(val).length >= keys.size - optionalKeys.size;
+    return matchingKeys && sameLengthKeys;
+  };
 
-  const isGenTypeInherited = (val: object): boolean =>
-    !!val && [...keys].every((key) => isKeyDefined(val, key));
+  const isGenTypeInherited = (val: object): boolean => {
+    if (!val) return false;
+    const matchingKeys = [...keys].every((key) => isKeyDefined(val, key));
+    const isInherited = Object.keys(val).length > keys.size;
+    return matchingKeys && isInherited;
+  };
 
   const genTypeCoercion = (val: object): GenType => {
     Object.keys(val)
