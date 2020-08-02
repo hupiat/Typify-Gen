@@ -9,7 +9,7 @@ export const typifyGen = <T extends object>(
   objects: T[],
   logic: GenerationLogic = "union"
 ) => {
-  if (!objects.length) {
+  if (objects && !objects.length) {
     throw Error("At least one argument should be provided");
   }
 
