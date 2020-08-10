@@ -34,4 +34,6 @@ isGenTypeInherited : (val: object) => boolean
 genTypeCoercion : (val: object) => GenType
 
 genTypeKeys : string[]
+
+genTypeOptionalKeys: string[]
 ```

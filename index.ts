@@ -110,6 +110,7 @@ export const typifyGen = <T extends object>(
     isGenType,
     isGenTypeInherited,
     genTypeKeys: [...keys],
+    genTypeOptionalKeys: [...optionalKeys],
     objects: objects as GenType[],
   };
 };

@@ -56,10 +56,15 @@ describe("union", () => {
     isGenTypeInherited,
     genTypeCoercion,
     genTypeKeys,
+    genTypeOptionalKeys,
   } = typifyGen(flowers, "union");
 
   it("should match with keys", () => {
     expect(genTypeKeys).toEqual(["petals", "color", "name", "brambles"]);
+  });
+
+  it("should match with optional keys", () => {
+    expect(genTypeOptionalKeys).toEqual(["name", "brambles"]);
   });
 
   it("should be the same type", () => {
@@ -131,10 +136,15 @@ describe("intersection", () => {
     isGenTypeInherited,
     genTypeCoercion,
     genTypeKeys,
+    genTypeOptionalKeys,
   } = typifyGen(flowers, "intersection");
 
   it("should match with keys", () => {
     expect(genTypeKeys).toEqual(["petals", "color"]);
+  });
+
+  it("should match with optional keys", () => {
+    expect(genTypeOptionalKeys).toEqual([]);
   });
 
   it("should be the same type", () => {
