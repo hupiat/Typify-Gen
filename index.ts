@@ -55,18 +55,26 @@ export const typifyGen = <T extends object>(
   // Then collecting keys without duplicatas to define manipulation methods
   const keys: Set<string> = new Set();
   const optionalKeys: Set<string> = new Set();
-  let isFirstIteration = true;
-  objects.forEach((obj) => {
+  const counter: Array<{ key: string; count: number }> = [];
+  for (const obj of objects) {
     Object.keys(obj).forEach((key) => {
-      if (!isFirstIteration && !keys.has(key)) {
-        optionalKeys.add(key);
-      }
       keys.add(key);
+      const keyCount = counter.find((keyCount) => keyCount.key === key);
+      if (!keyCount) {
+        counter.push({
+          key,
+          count: 1,
+        });
+      } else {
+        keyCount.count++;
+      }
     });
-    if (isFirstIteration) {
-      isFirstIteration = false;
-    }
-  });
+  }
+  if (logic === "union") {
+    counter
+      .filter((keyCount) => keyCount.count !== objects.length)
+      .forEach((keyCount) => optionalKeys.add(keyCount.key));
+  }
 
   const isGenType = (val: object): val is GenType => {
     if (!val) return false;

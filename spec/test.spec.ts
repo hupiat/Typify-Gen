@@ -2,13 +2,13 @@ import { typifyGen } from "..";
 
 const flowers = [
   {
-    petals: 7,
-    color: "red",
-  },
-  {
     petals: 4,
     color: "yellow",
     name: "tulip",
+  },
+  {
+    petals: 7,
+    color: "red",
   },
   {
     petals: 8,
@@ -34,7 +34,7 @@ describe("typify-gen", () => {
       expect(obj.color).toBeDefined();
       expect(obj.petals).toBeDefined();
     });
-    expect(objects[1].name).toBeDefined();
+    expect(objects[0].name).toBeDefined();
     expect(objects[2].brambles).toBeDefined();
   });
 
@@ -70,7 +70,7 @@ describe("union", () => {
       brambles: 15,
     };
     expect(isGenType(flower)).toBeTruthy();
-    expect(isGenType(objects[0])).toBeTruthy();
+    objects.forEach((obj) => expect(isGenType(obj)).toBeTruthy());
   });
 
   it("should be a different type", () => {
@@ -99,7 +99,11 @@ describe("union", () => {
       name: "orchid",
       brambles: 15,
     };
+    const notAFlower = {
+      name: "cat",
+    };
     expect(isGenTypeInherited(flower)).toBeFalsy();
+    expect(isGenTypeInherited(notAFlower)).toBeFalsy();
   });
 
   it("should coerce the given objects with the exact same keys", () => {
@@ -139,7 +143,7 @@ describe("intersection", () => {
       color: "purple",
     };
     expect(isGenType(flower)).toBeTruthy();
-    expect(isGenType(objects[0])).toBeTruthy();
+    objects.forEach((obj) => expect(isGenType(obj)).toBeTruthy());
   });
 
   it("should be a different type", () => {
@@ -164,7 +168,11 @@ describe("intersection", () => {
       petals: 2,
       color: "orchid",
     };
+    const notAFlower = {
+      name: "cat",
+    };
     expect(isGenTypeInherited(flower)).toBeFalsy();
+    expect(isGenTypeInherited(notAFlower)).toBeFalsy();
   });
 
   it("should coerce the given objects with the exact same keys", () => {
