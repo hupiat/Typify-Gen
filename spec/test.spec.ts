@@ -118,12 +118,20 @@ describe("union", () => {
       ageInWeeks: 2,
     };
     expect((genTypeCoercion(flower) as any).ageInWeeks).toBeUndefined();
-    expect(genTypeCoercion({})).toEqual(
+    expect(
+      genTypeCoercion(
+        {},
+        {
+          petals: 2,
+          color: "purple",
+        }
+      )
+    ).toEqual(
       jasmine.objectContaining({
-        petals: undefined,
-        color: undefined,
-        name: undefined,
-        brambles: undefined,
+        petals: 2,
+        color: "purple",
+        name: null,
+        brambles: null,
       })
     );
   });
@@ -192,10 +200,17 @@ describe("intersection", () => {
       brambles: 17,
     };
     expect((genTypeCoercion(flower) as any).brambles).toBeUndefined();
-    expect(genTypeCoercion({})).toEqual(
+    expect(
+      genTypeCoercion(
+        {},
+        {
+          petals: 2,
+        }
+      )
+    ).toEqual(
       jasmine.objectContaining({
-        petals: undefined,
-        color: undefined,
+        petals: 2,
+        color: null,
       })
     );
   });

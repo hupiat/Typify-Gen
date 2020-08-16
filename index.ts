@@ -93,14 +93,17 @@ export const typifyGen = <T extends object>(
     return matchingKeys && isInherited;
   };
 
-  const genTypeCoercion = (val: object): GenType => {
+  const genTypeCoercion = (val: object, byDefault?: object): GenType => {
     Object.keys(val)
       .filter((key) => !keys.has(key))
       .forEach((key) => delete val[key]);
 
     [...keys]
       .filter((key) => !isKeyDefined(val, key))
-      .forEach((key) => (val[key] = undefined));
+      .forEach(
+        (key) =>
+          (val[key] = byDefault && byDefault[key] ? byDefault[key] : null)
+      );
 
     return val as GenType;
   };

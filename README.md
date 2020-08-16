@@ -23,17 +23,18 @@ const myArrayTyped = objects;
 ## API
 
 ```typescript
-typifyGen<T>(objects: T, logic?: "union" | "intersection")
+typifyGen<T>(objects: T, logic?: "union" | "intersection") => {
 
-objects : GenType[]
+  objects : GenType[]
 
-isGenType : (val: object) => object is GenType
+  isGenType : (val: object) => object is GenType
 
-isGenTypeInherited : (val: object) => boolean
+  isGenTypeInherited : (val: object) => boolean
 
-genTypeCoercion : (val: object) => GenType
+  genTypeCoercion : (val: object, byDefault?: object) => GenType
 
-genTypeKeys : string[]
+  genTypeKeys : string[]
 
-genTypeOptionalKeys: string[]
+  genTypeOptionalKeys: string[]
+}
 ```
