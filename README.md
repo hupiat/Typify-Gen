@@ -35,6 +35,6 @@ typifyGen<T>(objects: T, logic?: "union" | "intersection") => {
 
   genTypeKeys : string[]
 
-  genTypeOptionalKeys: string[]
+  genTypeOptionalKeys : string[]
 }
 ```

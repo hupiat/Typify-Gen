@@ -1,6 +1,6 @@
 {
   "name": "typify-gen",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Generates dynamic types in TypeScript",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
